@@ -48,6 +48,7 @@ class NearEarthObject:
         self.designation = info.get('pdes')
         self.name = info.get('name')
         self.hazardous = True if info.get('pha', 'N') == 'Y' else False
+        # Written try and except here to handle the ValueError and return 'nan'.
         try:
             self.diameter = float(info.get('diameter', 'nan'))
         except ValueError:
@@ -75,6 +76,7 @@ class NearEarthObject:
                f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})"
 
     def serialize(self):
+        """Formatted the self data like dict"""
         return {
             "designation": self.designation,
             "name": self.name if self.name is not None else '',
@@ -109,6 +111,8 @@ class CloseApproach:
         # You should coerce these values to their appropriate data type and handle any edge cases.
         # The `cd_to_datetime` function will be useful.
         self._designation = info.get('des')
+        # Written try and except here to handle the ValueError and return 0.0.
+
         try:
             self.distance = float(info.get('dist', 0.0))
         except ValueError:
@@ -157,6 +161,7 @@ class CloseApproach:
                f"velocity={self.velocity:.2f}, neo={self.neo!r})"
 
     def serialize(self):
+        """Formatted the self data like dict"""
         return {
             "datetime_utc": self.time_str,
             "distance_au": self.distance,
@@ -165,6 +170,7 @@ class CloseApproach:
         }
 
     def toCSVRow(self):
+        """Formatted, to write in CSV file"""
         return {
             "datetime_utc": self.time_str,
             "distance_au": self.distance,

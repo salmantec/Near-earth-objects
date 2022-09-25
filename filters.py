@@ -149,30 +149,35 @@ def limit(iterator, n=None):
 
 
 class DateFilter(AttributeFilter):
+    """Date based filter"""
     @classmethod
     def get(cls, approach):
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
+    """Distance based filter"""
     @classmethod
     def get(cls, approach):
         return approach.distance
 
 
 class VelocityFilter(AttributeFilter):
+    """Velocity based filter"""
     @classmethod
     def get(cls, approach):
         return approach.velocity
 
 
 class DiameterFilter(AttributeFilter):
+    """Diameter based filter"""
     @classmethod
     def get(cls, approach):
         return approach.neo.diameter
 
 
 class HazardousFilter(AttributeFilter):
+    """Hazardous based filter"""
     @classmethod
     def get(cls, approach):
         return approach.neo.hazardous
